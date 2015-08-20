@@ -1,0 +1,735 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration-structure ne-type-name="INNOFIDEI">
+    <entities>
+	    <entity name="Device" oid="Device" access="r" min-occurs="1" max-occurs="1">
+		    <field name="DeviceSummary" oid=".DeviceSummary" access="r" datatype="string"/>
+			<entity name="DeviceInfo" oid=".DeviceInfo" access="r" min-occurs="1" max-occurs="1">
+			    <field name="SerialNumber" oid=".SerialNumber" access="r" datatype="string"/>
+			    <field name="Manufacturer" oid=".Manufacturer" access="r" datatype="string"/>
+				<field name="ManufacturerOUI" oid=".ManufacturerOUI" access="r" datatype="string"/>
+				<field name="ModelName" oid=".ModelName" access="r" datatype="string"/>
+				<field name="ProductClass" oid=".ProductClass" access="r" datatype="string"/>
+				<field name="HardwareVersion" oid=".HardwareVersion" access="r" datatype="string"/>
+				<field name="SoftwareVersion" oid=".SoftwareVersion" access="r" datatype="string"/>
+				<field name="Description" oid=".Description" access="r" datatype="string"/>
+				<field name="DeviceStatus" oid=".DeviceStatus" access="r" datatype="enum">
+				    <enum datatype="string">
+				        <items>
+					        <item name="Up" value="Up"/>
+					        <item name="Initializing" value="Initializing"/>
+						   <item name="Error" value="Error"/>
+					    </items>
+				    </enum>
+				</field>
+			</entity>
+			<entity name="FAPCapabilities" oid=".Services.FAPService.1.Capabilities" access="r" min-occurs="1" max-occurs="1">
+		        <field name="GPSEquipped" oid=".GPSEquipped" access="r" datatype="boolean"/>
+			    <field name="MaxTxPower" oid=".MaxTxPower" access="r" datatype="int" dataunit="dBm"/>
+			    <field name="SupportedSystems" oid=".SupportedSystems" access="r" datatype="list">
+			        <list datatype="string">
+                        <items>
+						    <item name="UMTS" value="UMTS"/>
+						    <item name="LTE" value="LTE"/>
+						    <item name="CDMA1x" value="CDMA1x"/>
+					    </items>
+				    </list>
+			    </field>
+			    <entity  name="LTE" oid=".LTE." access="r" min-occurs="1" max-occurs="1">
+				    <field name="DuplexMode" oid=".DuplexMode" access="r" datatype="enum">
+					    <enum datatype="string">
+						    <items>
+						        <item name="FDDMode" value="FDDMode"/>
+							    <item name="TDDMode" value="TDDMode"/> 
+						   </items>
+					    </enum>
+				    </field>
+			    </entity>
+		    </entity>
+   		    <entity name="FAPCellConfig" oid=".Services.FAPService.1.CellConfig" access="r" min-occurs="1" max-occurs="1">
+   		    	<entity name="LTE" oid=".LTE" access="r" min-occurs="1" max-occurs="1">
+   		    		<entity name="EPC" oid=".EPC" access="r" min-occurs="1" max-occurs="1">
+   		    			<field name="AllowedCipheringAlgorithmList" oid=".AllowedCipheringAlgorithmList" access="rw" datatype="list">
+   		    				<list datatype="string">
+   		    					<items>
+   		    						<item name="EEA0" value="EEA0"/>
+   					          	 	<item name="128EEA1" value="128-EEA1"/>
+   					           		<item name="128EEA2" value="128-EEA2"/>
+   		    					</items>
+   		    				</list>
+   		    			</field>
+   		    			<field name="AllowedIntegrityProtectionAlgorithmList" oid=".AllowedIntegrityProtectionAlgorithmList" access="rw" datatype="list">
+   		    				<list datatype="string">
+   		    					<items>
+   					          	 	<item name="128EIA1" value="128-EIA1"/>
+   					           		<item name="128EIA2" value="128-EIA2"/>
+   		    					</items>
+   		    				</list>
+   		    			</field>
+   		    			<field name="TAC" oid=".TAC" access="rw" datatype="string"/>
+   		    			<field name="MMEIpAddress" oid=".MMEIpAddress" access="rw" datatype="string" pattern="ip" />
+   		    			<field name="UserInactivityTimerLength" oid=".UserInactivityTimerLength" access="rw" datatype="string" />
+   		    			<field name="NofSctpStreamSend" oid=".NofSctpStreamSend" access="rw" datatype="string" />
+   		    			<field name="X_INNO-COM_PLMNID" oid=".X_INNO-COM_PLMNID" access="rw" datatype="string" min-length="5" max-length="6"/>
+   		    		</entity>
+   		    		<entity name="RAN" oid=".RAN" access="r" min-occurs="1" max-occurs="1">
+   		    			<entity name="Common" oid=".Common" access="r" min-occurs="1" max-occurs="1">
+   		    				<field name="CellIdentity" oid=".CellIdentity" access="rw" datatype="string"/>
+   		    			</entity>
+   		    			<entity name="RF" oid=".RF" access="r" min-occurs="1" max-occurs="1">
+   		    				<field name="EARFCNDL" oid=".EARFCNDL" access="rw" datatype="string"/>
+   		    				<field name="EARFCNUL" oid=".EARFCNUL" access="rw" datatype="string"/>
+   		    				<field name="FreqBandIndicator" oid=".FreqBandIndicator" access="rw" datatype="unsignedInt"/>
+   		    				<field name="DLBandwidth" oid=".DLBandwidth" access="rw" datatype="enum">
+   		    					<enum datatype="string">
+   		    						<items>
+   		    							<item name="6" value="6"/>
+   		    							<item name="15" value="15"/>
+   		    							<item name="25" value="25"/>
+   		    							<item name="50" value="50"/>
+   		    							<item name="75" value="75"/>
+   		    							<item name="100" value="100"/>
+   		    						</items>
+   		    					</enum>
+   		    				</field>
+   		    				<field name="ULBandwidth" oid=".ULBandwidth" access="rw" datatype="enum">
+   		    					<enum datatype="string">
+   		    						<items>
+   		    							<item name="6" value="6"/>
+   		    							<item name="15" value="15"/>
+   		    							<item name="25" value="25"/>
+   		    							<item name="50" value="50"/>
+   		    							<item name="75" value="75"/>
+   		    							<item name="100" value="100"/>
+   		    						</items>
+   		    					</enum>
+   		    				</field>
+   		    				<field name="ReferenceSignalPower" oid=".ReferenceSignalPower" access="rw" datatype="int"  />
+   		    				<field name="PhyCellID" oid=".PhyCellID" access="rw" datatype="string"/>
+   		    			</entity>
+   		    			<entity name="PHY" oid=".PHY" access="r" min-occurs="1" max-occurs="1">
+   		    				<entity name="AntennaInfo" oid=".AntennaInfo" access="r" min-occurs="1" max-occurs="1">
+   		    					<field name="AntennaPortsCount" oid=".AntennaPortsCount" access="r" datatype="unsignedInt"/>
+   		    					<entity name="X_INNO-COM_Dedi" oid=".X_INNO-COM_Dedi" access="r" min-occurs="1" max-occurs="1">
+	   		    					<field name="TransMode" oid=".TransMode" access="rw" datatype="enum">
+	   		    						<enum datatype="string">
+	   		    							<items>
+	   		    								<item name="TM1" value="TM1"/>
+	   		    								<item name="TM2" value="TM2"/>
+	   		    								<item name="TM3" value="TM3" default="true"/>
+	   		    								<item name="TM4" value="TM4"/>
+	   		    								<item name="TM5" value="TM5"/>
+	   		    								<item name="TM6" value="TM6"/>
+	   		    								<item name="TM7" value="TM7"/>
+	   		    							</items>
+	   		    						</enum>
+	   		    					</field>
+	   		    					<field name="CodebookSubsetRestrictionPresent" oid=".CodebookSubsetRestrictionPresent" access="rw" datatype="enum">
+	   		    						<enum datatype="string">
+	   		    							<items>
+	   		    								<item name="Not_Present" value="Not_Present"/>
+	   		    								<item name="Present" value="Present" default="true"/>
+	   		    							</items>
+	   		    						</enum>
+	   		    					</field>
+	   		    					<field name="CodebookN2TxAntennaTm3" oid=".CodebookN2TxAntennaTm3" access="rw" datatype="unsignedInt" min-value="0" max-value="3"/>
+	   		    					<field name="CodebookN4TxAntennaTm3" oid=".CodebookN4TxAntennaTm3" access="rw" datatype="unsignedInt" min-value="0" max-value="15"/>
+	   		    					<field name="CodebookN2TxAntennaTm4" oid=".CodebookN2TxAntennaTm4" access="rw" datatype="unsignedInt" min-value="0" max-value="63"/>
+	   		    					<field name="CodebookN4TxAntennaTm4" oid=".CodebookN4TxAntennaTm4" access="rw" datatype="double" />
+	   		    					<field name="CodebookN2TxAntennaTm5" oid=".CodebookN2TxAntennaTm5" access="rw" datatype="unsignedInt" min-value="0" max-value="15"/>
+	   		    					<field name="CodebookN4TxAntennaTm5" oid=".CodebookN4TxAntennaTm5" access="rw" datatype="unsignedInt" min-value="0" max-value="65535"/>
+	   		    					<field name="CodebookN2TxAntennaTm6" oid=".CodebookN2TxAntennaTm6" access="rw" datatype="unsignedInt" min-value="0" max-value="15"/>
+	   		    					<field name="CodebookN4TxAntennaTm6" oid=".CodebookN4TxAntennaTm6" access="rw" datatype="unsignedInt" min-value="0" max-value="65535"/>
+	   		    					<field name="CodebookSubsetRestrictionType" oid=".CodebookSubsetRestrictionType" access="rw" datatype="enum">
+	   		    						<enum datatype="string">
+	   		    							<items>
+	   		    								<item name="N2_TX_ANTENNA_TM3" value="N2_TX_ANTENNA_TM3" default="true"/>
+	   		    								<item name="N4_TX_ANTENNA_TM3" value="N4_TX_ANTENNA_TM3"/>
+	   		    								<item name="N2_TX_ANTENNA_TM4" value="N2_TX_ANTENNA_TM4"/>
+	   		    								<item name="N4_TX_ANTENNA_TM4" value="N4_TX_ANTENNA_TM4"/>
+	   		    								<item name="N2_TX_ANTENNA_TM5" value="N2_TX_ANTENNA_TM5"/>
+	   		    								<item name="N4_TX_ANTENNA_TM5" value="N4_TX_ANTENNA_TM5"/>
+	   		    								<item name="N2_TX_ANTENNA_TM6" value="N2_TX_ANTENNA_TM6"/>
+	   		    								<item name="N4_TX_ANTENNA_TM6" value="N4_TX_ANTENNA_TM6"/>
+	   		    							</items>
+	   		    						</enum>
+	   		    					</field>
+   		    					</entity>
+   		    				</entity>
+   		    				<entity name="PDSCH" oid=".PDSCH" access="r" min-occurs="1" max-occurs="1">
+   		    					<field name="Pb" oid=".Pb" access="rw" datatype="unsignedInt"/>
+   		    				</entity>
+   		    				<entity name="SRS" oid=".SRS" access="r" min-occurs="1" max-occurs="1">
+   		    					<field name="SRSEnabled" oid=".SRSEnabled" access="rw" datatype="boolean"/>
+   		    					<field name="SRSBandwidthConfig" oid=".SRSBandwidthConfig" access="rw" datatype="enum">
+   		    						<enum datatype="string">
+   		    							<items>
+   		    								<item name="0" value="0"/>
+   		    								<item name="1" value="1"/>
+   		    								<item name="2" value="2"/>
+   		    								<item name="3" value="3"/>
+   		    								<item name="4" value="4"/>
+   		    								<item name="5" value="5"/>
+   		    								<item name="6" value="6"/>
+   		    								<item name="7" value="7"/>
+   		    							</items>
+   		    						</enum>
+   		    					</field>
+   		    					<field name="SRSMaxUpPTS" oid=".SRSMaxUpPTS" access="rw" datatype="boolean"/>
+   		    					<field name="AckNackSRSSimultaneousTransmission" oid=".AckNackSRSSimultaneousTransmission" access="rw" datatype="boolean"/>
+   		    				</entity>
+   		    				<entity name="PRACH" oid=".PRACH" access="r" min-occurs="1" max-occurs="1">
+   		    					<field name="RootSequenceIndex" oid=".RootSequenceIndex" access="rw" datatype="string" />
+   		    					<field name="ConfigurationIndex" oid=".ConfigurationIndex" access="rw" datatype="unsignedInt"/>
+   		    					<field name="HighSpeedFlag" oid=".HighSpeedFlag" access="rw" datatype="boolean"/>
+   		    					<field name="ZeroCorrelationZoneConfig" oid=".ZeroCorrelationZoneConfig" access="rw" datatype="unsignedInt"/>
+   		    					<field name="FreqOffset" oid=".FreqOffset" access="rw" datatype="unsignedInt"/>
+   		    				</entity>
+   		    				<entity name="PUCCH" oid=".PUCCH" access="r" min-occurs="1" max-occurs="1">
+   		    					<field name="DeltaPUCCHShift" oid=".DeltaPUCCHShift" access="rw" datatype="enum">
+   		    						<enum datatype="string">
+   		    							<items>
+   		    								<item name="ds1" value="ds1"/>
+   		    								<item name="ds2" value="ds2"/>
+   		    								<item name="ds3" value="ds3"/>
+   		    							</items>
+   		    						</enum>
+   		    					</field>
+   		    					<field name="NRBCQI" oid=".NRBCQI" access="rw" datatype="unsignedInt" />
+   		    					<field name="NCSAN" oid=".NCSAN" access="r" datatype="unsignedInt"/>
+   		    					<field name="N1PUCCHAN" oid=".N1PUCCHAN" access="rw" datatype="unsignedInt"/>
+   		    				</entity>
+   							<entity name="PUSCH" oid=".PUSCH" access="r" min-occurs="1" max-occurs="1">
+   		    					<field name="NSB" oid=".NSB" access="rw" datatype="unsignedInt"/>
+   		    					<field name="HoppingMode" oid=".HoppingMode" access="rw" datatype="enum">
+   		    						<enum datatype="string">
+   		    							<items>
+   		    								<item name="InterSubFrame" value="InterSubFrame"/>
+   		    								<item name="IntraAndInterSubFrame" value="IntraAndInterSubFrame"/>
+   		    							</items>
+   		    						</enum>
+   		    					</field>
+   		    					<field name="HoppingOffset" oid=".HoppingOffset" access="rw" datatype="unsignedInt"/>
+   		    					<field name="Enable64QAM" oid=".Enable64QAM" access="rw" datatype="boolean"/>
+   		    					<entity name="ULRS" oid=".ULRS" access="r" min-occurs="1" max-occurs="1">
+   		    						<field name="GroupHoppingEnabled" oid=".GroupHoppingEnabled" access="rw" datatype="boolean"/>
+   		    						<field name="GroupAssignmentPUSCH" oid=".GroupAssignmentPUSCH" access="r" datatype="unsignedInt"/>
+   		    						<field name="SequenceHoppingEnabled" oid=".SequenceHoppingEnabled" access="rw" datatype="boolean"/>
+   		    						<field name="CyclicShift" oid=".CyclicShift" access="r" datatype="unsignedInt"/>
+   		    					</entity>
+   		    				</entity>
+   		    				<entity name="ULPowerControl" oid=".ULPowerControl" access="r" min-occurs="1" max-occurs="1">
+   		    					<field name="P0NominalPUSCH" oid=".P0NominalPUSCH" access="rw" datatype="int"/>
+   		    					<field name="Alpha" oid=".Alpha" access="rw" datatype="unsignedInt"/>
+   		    					<field name="P0NominalPUCCH" oid=".P0NominalPUCCH" access="rw" datatype="int"/>
+   		    					<field name="DeltaFPUCCHFormat1" oid=".DeltaFPUCCHFormat1" access="r" datatype="int"/>
+   		    					<field name="DeltaFPUCCHFormat1b" oid=".DeltaFPUCCHFormat1b" access="r" datatype="unsignedInt"/>
+   		    					<field name="DeltaFPUCCHFormat2" oid=".DeltaFPUCCHFormat2" access="r" datatype="int"/>
+   		    					<field name="DeltaFPUCCHFormat2a" oid=".DeltaFPUCCHFormat2a" access="r" datatype="int"/>
+   		    					<field name="DeltaFPUCCHFormat2b" oid=".DeltaFPUCCHFormat2b" access="r" datatype="int"/>
+   		    					<field name="DeltaPreambleMsg3" oid=".DeltaPreambleMsg3" access="r" datatype="int" />
+   		    				</entity>
+   		    				<entity name="TDDFrame" oid=".TDDFrame" access="r" min-occurs="1" max-occurs="1">
+   		    					<field name="SubFrameAssignment" oid=".SubFrameAssignment" access="rw" datatype="unsignedInt"/>
+   		    					<field name="SpecialSubframePatterns" oid=".SpecialSubframePatterns" access="rw" datatype="unsignedInt"/>
+   		    				</entity>
+   		    			</entity>
+   		    			<entity name="MAC" oid=".MAC" access="r" min-occurs="1" max-occurs="1">
+   		    				<entity name="RACH" oid=".RACH" access="r" min-occurs="1" max-occurs="1">
+   		    					<field name="NumberOfRaPreambles" oid=".NumberOfRaPreambles" access="rw" datatype="unsignedInt"/>
+   		    					<field name="SizeOfRaGroupA" oid=".SizeOfRaGroupA" access="rw" datatype="unsignedInt"/>
+   		    					<field name="MessageSizeGroupA" oid=".MessageSizeGroupA" access="rw" datatype="unsignedInt" />
+   		    					<field name="MessagePowerOffsetGroupB" oid=".MessagePowerOffsetGroupB" access="rw" datatype="int"  />
+   		    					<field name="PowerRampingStep" oid=".PowerRampingStep" access="rw" datatype="unsignedInt"  />
+   		    					<field name="PreambleInitialReceivedTargetPower" oid=".PreambleInitialReceivedTargetPower" access="rw" datatype="int"  />
+   		    					<field name="PreambleTransMax" oid=".PreambleTransMax" access="rw" datatype="unsignedInt"/>
+   		    					<field name="ResponseWindowSize" oid=".ResponseWindowSize" access="rw" datatype="unsignedInt"/>
+   		    					<field name="ContentionResolutionTimer" oid=".ContentionResolutionTimer" access="rw" datatype="unsignedInt"/>
+   		    					<field name="MaxHARQMsg3Tx" oid=".MaxHARQMsg3Tx" access="rw" datatype="unsignedInt"/>
+   		    				</entity>
+   		    				<entity name="DRX" oid=".DRX" access="r" min-occurs="1" max-occurs="1">
+   		    					<field name="DRXEnabled" oid=".DRXEnabled" access="rw" datatype="boolean"/>
+   		    					<field name="OnDurationTimer" oid=".OnDurationTimer" access="rw" datatype="unsignedInt"/>
+   		    					<field name="DRXInactivityTimer" oid=".DRXInactivityTimer" access="rw" datatype="unsignedInt"/>
+   		    					<field name="DRXRetransmissionTimer" oid=".DRXRetransmissionTimer" access="rw" datatype="unsignedInt"/>
+   		    					<field name="LongDRXCycle" oid=".LongDRXCycle" access="rw" datatype="unsignedInt"/>
+   		    					<field name="DRXStartOffset" oid=".DRXStartOffset" access="rw" datatype="unsignedInt"/>
+   		    					<field name="ShortDRXCycle" oid=".ShortDRXCycle" access="rw" datatype="unsignedInt"/>
+   		    					<field name="DRXShortCycleTimer" oid=".DRXShortCycleTimer" access="rw" datatype="unsignedInt"/>
+   		    				</entity>
+   		    				<entity name="ULSCH" oid=".ULSCH" access="r" min-occurs="1" max-occurs="1">
+   		    					<field name="MaxHARQTx" oid=".MaxHARQTx" access="r" datatype="unsignedInt"/>
+   		    					<field name="PeriodicBSRTimer" oid=".PeriodicBSRTimer" access="r" datatype="unsignedInt"/>
+   		    					<field name="RetxBSRTimer" oid=".RetxBSRTimer" access="r" datatype="unsignedInt"/>
+   		    					<field name="TTIBundling" oid=".TTIBundling" access="r" datatype="boolean"/>
+   		    				</entity>
+   		    			</entity>
+   		    			<entity name="RLC" oid=".RLC" access="r" min-occurs="1" max-occurs="1">
+   		    				<entity name="SRB1" oid=".SRB1" access="r" min-occurs="1" max-occurs="1">
+   		    					<field name="DefaultConfiguration" oid=".DefaultConfiguration" access="rw" datatype="boolean"/>
+   		    					<field name="TPollRetransmit" oid=".TPollRetransmit" access="rw" datatype="unsignedInt"  />
+   		    					<field name="PollPDU" oid=".PollPDU" access="rw" datatype="unsignedInt"/>
+   		    					<field name="PollByte" oid=".PollByte" access="rw" datatype="unsignedInt"  />
+   		    					<field name="MaxRetxThreshold" oid=".MaxRetxThreshold" access="rw" datatype="unsignedInt"/>
+   		    					<field name="TReordering" oid=".TReordering" access="rw" datatype="unsignedInt"  />
+   		    					<field name="TStatusProhibit" oid=".TStatusProhibit" access="rw" datatype="unsignedInt"  />
+   		    				</entity>
+   		    			</entity>
+   		    			<entity name="RRCTimers" oid=".RRCTimers" access="r" min-occurs="1" max-occurs="1">
+   		    				<field name="T300" oid=".T300" access="rw" datatype="unsignedInt"  />
+   		    				<field name="T301" oid=".T301" access="rw" datatype="unsignedInt"  />
+   		    				<field name="T304EUTRA" oid=".T304EUTRA" access="rw" datatype="unsignedInt" />
+   		    				<field name="T310" oid=".T310" access="rw" datatype="unsignedInt"  />
+   		    				<field name="T311" oid=".T311" access="rw" datatype="unsignedInt"  />
+   		    				<field name="N310" oid=".N310" access="rw" datatype="unsignedInt"/>
+   		    				<field name="N311" oid=".N311" access="rw" datatype="unsignedInt"/>
+   		    			</entity>
+   		    			<entity name="CellRestriction" oid=".CellRestriction" access="r" min-occurs="1" max-occurs="1">
+   		    				<field name="CellBarred" oid=".CellBarred" access="rw" datatype="boolean"/>
+   		    			</entity>
+   		    			<entity name="Mobility" oid=".Mobility" access="r" min-occurs="1" max-occurs="1">
+   		    				<entity name="IdleMode" oid=".IdleMode" access="r" min-occurs="1" max-occurs="1">
+   		    					<entity name="Common" oid=".Common" access="r" min-occurs="1" max-occurs="1">
+   		    						<field name="Qhyst" oid=".Qhyst" access="rw" datatype="unsignedInt"  />
+   		    						<field name="QHystSFMedium" oid=".QHystSFMedium" access="rw" datatype="int"  />
+   		    						<field name="QHystSFHigh" oid=".QHystSFHigh" access="rw" datatype="int"  />
+   		    						<field name="TEvaluation" oid=".TEvaluation" access="rw" datatype="unsignedInt"  />
+   		    						<field name="THystNormal" oid=".THystNormal" access="rw" datatype="unsignedInt"  />
+   		    					</entity>
+   		    					<entity name="IntraFreq" oid=".IntraFreq" access="r" min-occurs="1" max-occurs="1">
+   		    						<field name="QRxLevMinSIB3" oid=".QRxLevMinSIB3" access="rw" datatype="int"  />
+   		    						<field name="SIntraSearch" oid=".SIntraSearch" access="rw" datatype="unsignedInt"  />
+   		    						<field name="TReselectionEUTRA" oid=".TReselectionEUTRA" access="rw" datatype="unsignedInt"  />
+   		    						<field name="PMax" oid=".PMax" access="rw" datatype="int" />		    						
+   		    						<field name="TReselectionEUTRASFMedium" oid=".TReselectionEUTRASFMedium" access="rw" datatype="unsignedInt"/>
+   		    						<field name="TReselectionEUTRASFHigh" oid=".TReselectionEUTRASFHigh" access="rw" datatype="unsignedInt"/>
+   		    					</entity>
+   		    					<entity name="InterFreq" oid=".InterFreq" access="r" min-occurs="1" max-occurs="1">
+   		    						<entity name="Carrier" oid=".Carrier" access="r" min-occurs="1" max-occurs="unbounded">
+   		    							<field name="QRxLevMinSIB5" oid=".QRxLevMinSIB5" access="rw" datatype="int"  />
+   		    							<field name="QOffsetFreq" oid=".QOffsetFreq" access="rw" datatype="int"  />
+   		    							<field name="TReselectionEUTRA" oid=".TReselectionEUTRA" access="rw" datatype="unsignedInt"  />
+   		    							<field name="CellReselectionPriority" oid=".CellReselectionPriority" access="rw" datatype="unsignedInt"/>
+   		    							<field name="ThreshXHigh" oid=".ThreshXHigh" access="rw" datatype="unsignedInt"  />
+   		    							<field name="ThreshXLow" oid=".ThreshXLow" access="rw" datatype="unsignedInt" />
+   		    						</entity>
+   		    					</entity>
+   		    				</entity>
+   		    				<entity name="ConnMode" oid=".ConnMode" access="r" min-occurs="1" max-occurs="1">
+   		    					<entity name="EUTRA" oid=".EUTRA" access="r" min-occurs="1" max-occurs="1">
+   		    						<field name="FilterCoefficientRSRP" oid=".FilterCoefficientRSRP" access="rw" datatype="unsignedInt"/>
+   		    						<field name="FilterCoefficientRSRQ" oid=".FilterCoefficientRSRQ" access="rw" datatype="unsignedInt"/>
+   		    						<field name="A1ThresholdRSRP" oid=".A1ThresholdRSRP" access="rw" datatype="unsignedInt"/>
+   		    						<field name="A1ThresholdRSRQ" oid=".A1ThresholdRSRQ" access="rw" datatype="unsignedInt"/>
+   		    						<field name="A2ThresholdRSRP" oid=".A2ThresholdRSRP" access="rw" datatype="unsignedInt"/>
+   		    						<field name="A2ThresholdRSRQ" oid=".A2ThresholdRSRQ" access="rw" datatype="unsignedInt"/>
+   		    						<field name="A3Offset" oid=".A3Offset" access="rw" datatype="int" min-value="-30" max-value="30"/>
+   		    						<field name="ReportOnLeave" oid=".ReportOnLeave" access="rw" datatype="boolean"/>
+   		    						<field name="A4ThresholdRSRP" oid=".A4ThresholdRSRP" access="rw" datatype="unsignedInt"/>
+   		    						<field name="A4ThresholdRSRQ" oid=".A4ThresholdRSRQ" access="rw" datatype="unsignedInt"/>
+   		    						
+   		    						<field name="A5Threshold1RSRP" oid=".A5Threshold1RSRP" access="rw" datatype="unsignedInt"/>
+   		    						<field name="A5Threshold1RSRQ" oid=".A5Threshold1RSRQ" access="rw" datatype="unsignedInt"/>
+   		    						<field name="A5Threshold2RSRP" oid=".A5Threshold2RSRP" access="rw" datatype="unsignedInt"/>
+   		    						<field name="A5Threshold2RSRQ" oid=".A5Threshold2RSRQ" access="rw" datatype="unsignedInt"/>
+   		    						<field name="Hysteresis" oid=".Hysteresis" access="rw" datatype="unsignedInt"/>
+   		    						<field name="TimeToTrigger" oid=".TimeToTrigger" access="rw" datatype="unsignedInt" />
+   		    						<field name="TriggerQuantity" oid=".TriggerQuantity" access="rw" datatype="enum">
+   		    							<enum datatype="string">
+   		    								<items>
+   		    									<item name="RSRP" value="RSRP"/>
+   		    									<item name="RSRQ" value="RSRQ"/>
+   		    								</items>
+   		    							</enum>
+   		    						</field>
+   		    						<field name="ReportQuantity" oid=".ReportQuantity" access="rw" datatype="enum">
+   		    							<enum datatype="string">
+   		    								<items>
+   		    									<item name="SameAsTriggerQuantity" value="SameAsTriggerQuantity"/>
+   		    									<item name="Both" value="Both"/>
+   		    								</items>
+   		    							</enum>
+   		    						</field>
+   		    						<field name="MaxReportCells" oid=".MaxReportCells" access="r" datatype="unsignedInt"/>
+   		    						<field name="ReportInterval" oid=".ReportInterval" access="rw" datatype="unsignedInt" />
+   		    						<field name="ReportAmount" oid=".ReportAmount" access="rw" datatype="unsignedInt"/>
+   		    					</entity>
+   		    				</entity>
+   		    			</entity>		
+   		    		</entity>
+   		    	</entity>		    	
+   		    </entity>
+   		    <entity name="FAPREM" oid=".Services.FAPService.1.REM" access="r" min-occurs="1" max-occurs="1">
+   		    	<entity name="LTE" oid=".LTE" access="r" min-occurs="1" max-occurs="1">
+   		    		<entity name="CarrierMeas" oid=".CarrierMeas" access="rw" min-occurs="1" max-occurs="unbounded">
+   		    			<field name="CarrierARFCNDL" oid=".CarrierARFCNDL" access="rw" datatype="int" />
+   		    			<field name="CarrierChWidth" oid=".CarrierChWidth" access="rw" datatype="int"/>
+   		    		</entity>
+   		    	</entity>
+   		    </entity>		    
+   		    <entity name="FAPControl" oid=".Services.FAPService.1.FAPControl" access="r" min-occurs="1" max-occurs="1">
+   		        <entity name="LTE" oid=".LTE" access="r" min-occurs="1" max-occurs="1">
+   		            <field name="OpState" oid=".OpState" access="r" datatype="boolean"/>
+   			        <field name="AdminState"  oid=".AdminState" access="rw" datatype="boolean"/>
+   			        <field name="RFTxStatus" oid=".RFTxStatus" access="r" datatype="boolean"/>
+   			        <entity name="Gateway" oid=".Gateway" access="r" min-occurs="1" max-occurs="1">
+   				        <field name="SecGWServer1" oid=".SecGWServer1" access="rw"  datatype="string"/>
+   				        <field name="SecGWServer2" oid=".SecGWServer2" access="rw"  datatype="string"/>
+   				        <field name="SecGWServer3"  oid=".SecGWServer3" access="rw" datatype="string"/>
+   				        <field name="S1SigLinkServerList" oid=".S1SigLinkServerList"  datatype="string"/>
+   				        <field name="S1ConnectionMode" oid=".S1ConnectionMode" datatype="enum">
+   					        <enum datatype="string">
+   				               <items>
+   					               <item name="One" value="One" default="true"/>
+   					               <item name="All" value="All"/>
+   					           </items>
+   				            </enum>
+   	                    </field>
+   			            <field name="S1SigLinkPort" oid=".S1SigLinkPort"  datatype="int"/>
+   			        </entity>
+   			    </entity>
+   	        </entity>
+   		    <!--   	        -->
+   		    <entity name="X_INNO-COM_SmallCell" oid=".X_INNO-COM_SmallCell" access="r" min-occurs="1" max-occurs="1">
+   		        <entity name="StateManage" oid=".StateManage" access="r" min-occurs="1" max-occurs="1">  		            
+   			        <entity name="Common" oid=".Common" access="r" min-occurs="1" max-occurs="1">
+   			        	<field name="CellState" oid=".CellState" access="rw" datatype="enum">
+				        	<enum datatype="string">
+			            		<items>
+			    					<item name="idle" value="idle"/>
+			    					<item name="ready" value="ready"/>
+			    					<item name="block" value="block"/>
+				        		</items>
+			            	</enum>
+                    	</field>
+   			        	<field name="SyncState" oid=".SyncState" access="rw" datatype="enum">
+				        	<enum datatype="string">
+			            		<items>
+				            		<item name="ptp" value="ptp"/>
+			            			<item name="gps_sync" value="gps_sync"/>
+			            			<item name="gps_not_sync" value="gps_not_sync"/>
+			            			<item name="master" value="master"/>
+			            			<item name="gps_master_sync" value="gps_master_sync"/>
+			            			<item name="gps_master_not_sync" value="gps_master_not_sync"/>
+			            			<item name="slave_sync" value="slave_sync"/>
+			            			<item name="slave_not_sync" value="slave_not_sync"/>
+			    					<item name="gps_master_backup_sync" value="gps_master_backup_sync"/>
+			    					<item name="gps_missing" value="gps_missing"/>
+			    					<item name="gps_master_missing" value="gps_master_missing"/>
+			    					<item name="gps_master_backup_missing" value="gps_master_backup_missing"/>
+			    					<item name="not_sure" value="not_sure"/>
+				        		</items>
+			            	</enum>
+                    	</field>
+   			        </entity>
+   			    </entity>
+   			    <entity name="DeviceMonitor" oid=".DeviceMonitor" access="r" min-occurs="1" max-occurs="1">  		            
+   			        <entity name="UE" oid=".UE" access="r" min-occurs="1" max-occurs="1">
+   			        	<field name="StatRptUeNum" oid=".StatRptUeNum" access="rw" datatype="enum">
+				        	<enum datatype="unsignedInt">
+			            		<items>
+			    					<item name="0" value="0"/>
+			    					<item name="8" value="8"/>
+				        		</items>
+			            	</enum>
+                    	</field>
+   			        </entity>
+   			    </entity>
+   	        </entity>
+   		    <entity name="MEAS_CONFIG_REQ_MSG" oid=".MEAS_CONFIG_REQ_MSG" access="r" min-occurs="1" max-occurs="1">
+   		        <field name="NeighCellIdNum" oid=".NeighCellIdNum" access="rw" datatype="unsignedInt" min-value="0" max-value="16"/>
+   		        <entity name="NEIGH_CELL_ID_S" oid=".NEIGH_CELL_ID_S" access="r" min-occurs="1" max-occurs="unbounded">
+   		            <field name="CarrierFreq" oid=".CarrierFreq" access="rw" datatype="unsignedInt"  min-value="0" max-value="65535"/>
+   		            <field name="PhyCellId" oid=".PhyCellId" access="rw" datatype="unsignedInt"  min-value="0" max-value="503"/>
+   			        <entity name="TARGET_ID_S" oid=".TARGET_ID_S" access="r" min-occurs="1" max-occurs="1">
+   			        	<entity name="GLOBAL_ENB_ID_S" oid=".GLOBAL_ENB_ID_S" access="r" min-occurs="1" max-occurs="1">
+   			        		<field name="PlmnId"  oid=".PlmnId" access="rw" datatype="string" min-length="5" max-length="6"/>
+   			        		<field name="EnbId" oid=".EnbId" access="rw" datatype="unsignedInt" min-value="0" max-value="4294967295"/>
+   			        	</entity>
+   			        	<entity name="TAI_S" oid=".TAI_S" access="r" min-occurs="1" max-occurs="1">
+   			        		<field name="PlmnId"  oid=".PlmnId" access="rw" datatype="string" min-length="5" max-length="6"/>
+   			        		<field name="Tac" oid=".Tac" access="rw" datatype="unsignedInt" min-value="0" max-value="65535"/>
+   			        	</entity>
+   			        </entity>
+   			    </entity>
+   	        </entity>
+   		    <entity name="CELL_SETUP_REQ_MSG" oid=".CELL_SETUP_REQ_MSG" access="r" min-occurs="1" max-occurs="1">
+   		        <field name="IntraFreqNeighCellNum" oid=".IntraFreqNeighCellNum" access="rw" datatype="unsignedInt"/>
+   		        <entity name="CELL_CONFIG" oid=".CELL_CONFIG" access="r" min-occurs="1" max-occurs="1">
+ 	        	    <field name="MeasCfgType" oid=".MeasCfgType" access="rw" datatype="enum">
+				        <enum datatype="unsignedInt">
+			               <items>
+			    				<item name="0" value="0"/>
+			    				<item name="1" value="1"/>
+				           </items>
+			            </enum>
+                    </field>
+                    <field name="PbchTxPow"  oid=".PbchTxPow" access="rw" datatype="unsignedInt"/>
+                    <field name="MaxTxPower"  oid=".MaxTxPower" access="rw" datatype="unsignedInt"/>
+			        <field name="DlSchedScheme" oid=".DlSchedScheme" access="rw" datatype="enum">
+				        <enum datatype="unsignedInt">
+			               <items>
+			    				<item name="0" value="0"/>
+			    				<item name="1" value="1"/>
+				           </items>
+			            </enum>
+                    </field>
+                    <field name="DlEqualUeNum"  oid=".DlEqualUeNum" access="rw" datatype="unsignedInt"/>
+			        <field name="UlSchedScheme" oid=".UlSchedScheme" access="rw" datatype="enum">
+				        <enum datatype="unsignedInt">
+			               <items>
+			    				<item name="0" value="0"/>
+			    				<item name="1" value="1"/>
+				           </items>
+			            </enum>
+                    </field>
+                    <field name="UlEqualUeNum"  oid=".UlEqualUeNum" access="rw" datatype="unsignedInt"/>
+                    <field name="PhrDci0Period"  oid=".PhrDci0Period" access="rw" datatype="unsignedInt"/>
+                    <field name="PucchPowIirCoef"  oid=".PucchPowIirCoef" access="rw" datatype="unsignedInt"/>
+                    <field name="ReportPeriod"  oid=".ReportPeriod" access="rw" datatype="unsignedInt"/>
+                    <field name="HoDlDataFwdFlag"  oid=".HoDlDataFwdFlag" access="rw" datatype="enum">
+                    	<enum datatype="unsignedInt">
+			               <items>
+			    				<item name="0" value="0"/>
+			    				<item name="1" value="1"/>
+				           </items>
+			            </enum>
+                    </field>
+                    <field name="HoUlDataFwdFlag"  oid=".HoUlDataFwdFlag" access="rw" datatype="enum">
+                    	<enum datatype="unsignedInt">
+			               <items>
+			    				<item name="0" value="0"/>
+			    				<item name="1" value="1"/>
+				           </items>
+			            </enum>
+                    </field>	
+   		        </entity>
+   		        <entity name="NEIGH_CELL_INFO_S" oid=".NEIGH_CELL_INFO_S" access="r" min-occurs="1" max-occurs="unbounded">
+   		            <field name="PhyCellId" oid=".PhyCellId" access="rw" datatype="unsignedInt"/>
+   		            <field name="QoffsetCell" oid=".QoffsetCell" access="rw" datatype="unsignedInt"/>
+   			    </entity>
+   	        </entity>
+   	        <entity name="CELL_BLOCK_REQ_MSG" oid=".CELL_BLOCK_REQ_MSG" access="r" min-occurs="1" max-occurs="1">
+   	        	<field name="BlockRequestFlag" oid=".BlockRequestFlag" access="rw" datatype="unsignedInt"  min-value="0" max-value="1"/>
+   	        </entity>
+   	        <entity name="CELL_UNBLOCK_REQ_MSG" oid=".CELL_UNBLOCK_REQ_MSG" access="r" min-occurs="1" max-occurs="1">
+   	        	<field name="UnBlockRequestFlag" oid=".UnBlockRequestFlag" access="rw" datatype="unsignedInt"/>
+   	        </entity>	
+   	        <entity name="SMALLCELL_RF_PARAM_CONF" oid=".SMALLCELL_RF_PARAM_CONF" access="r" min-occurs="1" max-occurs="1">
+   	        	<field name="TddFddConfig" oid=".TddFddConfig" access="rw" datatype="enum">
+    		   		<enum datatype="string">
+		               <items>
+			               <item name="INNO_FDD" value="INNO_FDD" default="true"/>
+			               <item name="INNO_TDD" value="INNO_TDD"/>
+			               <item name="OTHER" value="OTHER"/>
+			           </items>
+		            </enum>
+   	        	</field>
+   	        	<field name="Earfcn" oid=".Earfcn" access="rw" datatype="unsignedInt" min-value="0" max-value="65535"/>
+   	        	<field name="StartSyncMode" oid=".StartSyncMode" access="rw" datatype="enum">
+    		   		<enum datatype="string">
+		               <items>
+			               <item name="ptp_pps" value="ptp_pps" default="true"/>
+			               <item name="gps_pps" value="gps_pps"/>
+			               <item name="master" value="master"/>
+			               <item name="slave" value="slave"/>
+			               <item name="gps_master" value="gps_master"/>
+			           </items>
+		            </enum>
+   	        	</field>
+   	        	<field name="HardwareType" oid=".HardwareType" access="rw" datatype="enum">
+    		   		<enum datatype="string">
+		               <items>
+			               <item name="FSL" value="FSL" default="true"/>
+			               <item name="P10" value="P10"/>
+			           </items>
+		            </enum>
+   	        	</field>
+   	        	<field name="Bandwidth" oid=".Bandwidth" access="rw" datatype="enum">
+    		   		<enum datatype="string">
+		               <items>
+			               <item name="5M" value="5M" default="true"/>
+			               <item name="10M" value="10M"/>
+			               <item name="15M" value="15M"/>
+			               <item name="20M" value="20M"/>
+			           </items>
+		            </enum>
+   	        	</field>
+				<field name="AssignmentRatio" oid=".AssignmentRatio" access="rw" datatype="enum">
+    		   		<enum datatype="string">
+		               <items>
+			               <item name="dlulconfig0" value="dlulconfig0" default="true"/>
+			               <item name="dlulconfig1" value="dlulconfig1"/>
+			               <item name="dlulconfig10" value="dlulconfig10"/>
+			               <item name="dlulconfig2" value="dlulconfig2"/>
+			           </items>
+		            </enum>
+   	        	</field>
+   	        	<field name="TxPower" oid=".TxPower" access="rw" datatype="unsignedInt" min-value="0" max-value="60"/>
+   	        </entity>	
+   	        <entity name="SMALLCELL_ENB_NETWORK_CONF" oid=".SMALLCELL_ENB_NETWORK_CONF" access="r" min-occurs="1" max-occurs="1">
+   	        	<field name="IPAddress" oid=".IPAddress" access="rw" datatype="String" pattern="ip"/>
+   	        	<field name="SubnetMask" oid=".SubnetMask" access="rw" datatype="String" pattern="ip"/>
+   	        	<field name="Gateway" oid=".Gateway" access="rw" datatype="String" pattern="ip"/>
+   	        </entity>	
+   		    <entity name="UE_RELEASE_REQ_MSG" oid=".UE_RELEASE_REQ_MSG" access="r" min-occurs="1" max-occurs="1">
+   		        <field name="NofUeRls" oid=".NofUeRls" access="rw" datatype="unsignedInt"/>
+   		        <entity name="UE_RLS_INFO" oid=".UE_RLS_INFO." access="r" min-occurs="1" max-occurs="32">
+   		            <field name="UeId" oid=".UeId" access="rw" datatype="unsignedInt"/>
+   			        <field name="RlsCause" oid=".RlsCause" datatype="enum">
+   				        <enum datatype="unsignedInt">
+   			               <items>
+   				               <item name="0" value="0"/>
+   				               <item name="1" value="1"/>
+   				           </items>
+   			            </enum>
+                       </field>
+                    <field name="RedirectedCarrierFreq" oid=".RedirectedCarrierFreq" access="rw" datatype="unsignedInt"/>
+   			        <entity name="IDLE_MODE_MOBILITY_CTRL_INFO" oid=".IDLE_MODE_MOBILITY_CTRL_INFO" access="r" min-occurs="1" max-occurs="1">
+   				        <field name="T320" oid=".T320" datatype="enum">
+   					        <enum datatype="unsignedInt">
+   				               <items>
+   				    				<item name="5" value="5"/>
+   				    				<item name="10" value="10"/>
+   				    				<item name="20" value="20"/>
+   				    				<item name="30" value="30"/>
+   				    				<item name="60" value="60"/>
+   				    				<item name="120" value="120"/>
+   				    				<item name="180" value="180"/>
+   					           </items>
+   				            </enum>
+   	                    </field>
+   			        	<entity name="FREQ_PRIORITY_EUTRA" oid=".FREQ_PRIORITY_EUTRA" access="r" min-occurs="1" max-occurs="8">
+   			        		<field name="CarrierFreq"  oid=".CarrierFreq" access="rw" datatype="unsignedInt"/>
+   			        		<field name="CellReselPriority" oid=".CellReselPriority" access="rw" datatype="unsignedInt"/>
+   			        	</entity>
+   			        </entity>
+   			    </entity>
+   	        </entity>
+  		    <entity name="PeriodicStatistics" oid=".PeriodicStatistics" access="r" min-occurs="1" max-occurs="1">
+  		    	<field name="MinSampleInterval" oid=".MinSampleInterval" access="r" datatype="unsignedInt" dataunit="sec"/>
+  		    	<field name="MaxReportSamples" oid=".MaxReportSamples" access="r" datatype="unsignedInt"/>
+  		    	<!--field name="SampleSetNumberOfEntries" oid=".SampleSetNumberOfEntries" access="r" datatype="unsignedInt"/-->
+  		    	<entity name="SampleSet" oid=".SampleSet" access="r" min-occurs="1" max-occurs="100">
+  		    		<field name="Alias" oid=".Alias" access="rw" datatype="enum">
+	    				<enum datatype="string">
+	    					<items>
+	    						<item name="RRCConnectionSetup/ReestabInfo" value="RRCConnectionSetup/ReestabInfo"/>
+	    						<item name="RRCConnectionReleaseInfo" value="RRCConnectionReleaseInfo"/>
+	    						<item name="HandoverInfo" value="HandoverInfo"/>
+	    						<item name="BasicInfo" value="BasicInfo"/>
+	    					</items>
+	    				</enum>
+	    			</field>
+  		    		<field name="Enable" oid=".Enable" access="rw" datatype="boolean"/>
+  		    		<field name="Status" oid=".Status" access="r" datatype="enum">
+  		    			<enum datatype="string">
+  		    				<items>
+  		    					<item name="Disabled" value="Disabled"/>
+  		    					<item name="Enabled" value="Enabled"/>
+  		    					<item name="Trigger" value="Trigger"/>
+  		    				</items>
+  		    			</enum>
+  		    		</field>
+  		    		<field name="Name" oid=".Name" access="rw" datatype="string"/>
+  		    		<field name="SampleInterval" oid=".SampleInterval" access="rw" datatype="unsignedInt" dataunit="sec"/>
+  		    		<field name="ReportSamples" oid=".ReportSamples" access="rw" datatype="unsignedInt"/>
+  		    		<field name="TimeReference" oid=".TimeReference" access="rw" datatype="dateTime"/>
+  		    		<field name="FetchSamples" oid=".FetchSamples" access="rw" datatype="unsignedInt"/>
+  		    		<field name="ForceSample" oid=".ForceSample" access="rw" datatype="boolean"/>
+  		    		<field name="ReportStartTime" oid=".ReportStartTime" access="r" datatype="dateTime"/>
+  		    		<field name="ReportEndTime" oid=".ReportEndTime" access="r" datatype="dateTime"/>
+  		    		<field name="SampleSeconds" oid=".SampleSeconds" access="r" datatype="string"/>
+  		    		<!--field name="ParameterNumberOfEntries" oid=".ParameterNumberOfEntries" access="r" datatype="unsignedInt"/-->
+  		    		<entity name="Parameter" oid=".Parameter" access="r" min-occurs="1" max-occurs="unbounded">
+  		    			<field name="Alias" oid=".Alias" access="rw" datatype="enum">
+  		    				<enum datatype="string">
+  		    					<items>
+  		    						<item name="RrcConnReqNumByUe" value="RrcConnReqNumByUe"/>
+  		    						<item name="RrcConnSuccNumByUe" value="RrcConnSuccNumByUe"/>
+  		    						<item name="RrcConnReqNumByNet" value="RrcConnReqNumByNet"/>
+  		    						<item name="RrcConnSuccNumByNet" value="RrcConnSuccNumByNet"/>
+  		    						<item name="RrcConnFailNumByUeNoResp" value="RrcConnFailNumByUeNoResp"/>
+  		    						<item name="RrcConnFailNumByReject" value="RrcConnFailNumByReject"/>
+  		    						<item name="RrcConnFailNumByOther" value="RrcConnFailNumByOther"/>
+  		    						<item name="RrcReestabReqNum" value="RrcReestabReqNum"/>
+  		    						<item name="RrcReestabSuccNum" value="RrcReestabSuccNum"/>
+  		    						<item name="UeAbnormalReleaseNum" value="UeAbnormalReleaseNum"/>
+  		    						<item name="UeNormalReleaseNum" value="UeNormalReleaseNum"/>
+  		    						<item name="S1HandoverReqNum" value="S1HandoverReqNum"/>
+  		    						<item name="S1HandoverSuccNum" value="S1HandoverSuccNum"/>
+  		    						<item name="IntraFreqHandoverReqNum" value="IntraFreqHandoverReqNum"/>
+  		    						<item name="IntraFreqHandoverSuccNum" value="IntraFreqHandoverSuccNum"/>
+  		    						<item name="CellState" value="CellState"/>
+  		    						<item name="ConnectedUeNum" value="ConnectedUeNum"/>
+  		    					</items>
+  		    				</enum>
+  		    			</field>
+  		    			<field name="Enable" oid=".Enable" access="rw" datatype="boolean"/>
+  		    			<field name="Reference" oid=".Reference" access="rw" datatype="string"/>
+  		    			<field name="SampleMode" oid=".SampleMode" access="rw" datatype="enum">
+  		    				<enum datatype="string">
+  		    					<items>
+  		    						<item name="Current" value="Current"/>
+  		    						<item name="Change" value="Change"/>
+  		    					</items>
+  		    				</enum>
+  		    			</field>
+  		    			<field name="CalculationMode" oid=".CalculationMode" access="rw" datatype="enum">
+  		    				<enum datatype="string">
+  		    					<items>
+  		    						<item name="Latest" value="Latest"/>
+  		    						<item name="Minimum" value="Minimum"/>
+  		    						<item name="Maximum" value="Maximum"/>
+  		    						<item name="Average" value="Average"/>
+  		    					</items>
+  		    				</enum>
+  		    			</field>
+  		    			<field name="LowThreshold" oid=".LowThreshold" access="rw" datatype="int"/>
+ 		    			<field name="HighThreshold" oid=".HighThreshold" access="rw" datatype="int"/>
+  		    			<field name="SampleSeconds" oid=".SampleSeconds" access="r" datatype="string"/>
+  		    			<field name="SuspectData" oid=".SuspectData" access="r" datatype="string"/>
+  		    			<field name="Values" oid=".Values" access="r" datatype="string"/>
+  		    			<field name="Failures" oid=".Failures" access="r" datatype="unsignedInt"/>
+  		    		</entity>
+  		    	</entity>
+  		    </entity>
+		    <entity name="FAP" oid=".FAP" access="r" min-occurs="1" max-occurs="1">
+		    	<entity name="PerfMgmt" oid=".PerfMgmt" access="r" min-occurs="1" max-occurs="1">
+		    		<entity name="Config" oid=".Config" access="r" min-occurs="1" max-occurs="unbounded">
+		    			<field name="Enable" oid=".Enable" access="rw" datatype="boolean"/>
+		    			<field name="Alias" oid=".Alias" access="rw" datatype="string"/>
+		    			<field name="URL" oid=".URL" access="rw" datatype="string"/>
+		    			<field name="Username" oid=".Username" access="rw" datatype="string"/>
+		    			<field name="Password" oid=".Password" access="rw" datatype="string"/>
+		    			<field name="PeriodicUploadInterval" oid=".PeriodicUploadInterval" access="rw" datatype="unsignedInt" dataunit="sec"/>
+		    			<field name="PeriodicUploadTime" oid=".PeriodicUploadTime" access="rw" datatype="dateTime"/>
+		    		</entity>
+		    	</entity>
+		    </entity>
+		    <entity name="Monitor" oid=".Monitor" access="r" min-occurs="1" max-occurs="1">
+    			<field name="CellState" oid=".CellState" access="rw" datatype="boolean"/>
+    			<field name="ConnectedUeNum" oid=".ConnectedUeNum" access="rw" datatype="unsignedInt"/>
+    			<field name="ULUserPlaneBytes" oid=".ULUserPlaneBytes" access="rw" datatype="unsignedInt"/>
+    			<field name="DLUserPlaneBytes" oid=".DLUserPlaneBytes" access="rw" datatype="unsignedInt"/>
+    			<field name="ULPhyThroughput" oid=".ULPhyThroughput" access="rw" datatype="unsignedInt"/>
+    			<field name="DLPhyThroughput" oid=".DLPhyThroughput" access="rw" datatype="unsignedInt"/>
+    			<field name="ULPdcpThroughput" oid=".ULPdcpThroughput" access="rw" datatype="unsignedInt"/>
+    			<field name="DLPdcpThroughput" oid=".DLPdcpThroughput" access="rw" datatype="unsignedInt"/>
+    			<field name="ULIpThroughput" oid=".ULIpThroughput" access="rw" datatype="unsignedInt"/>
+    			<field name="DLIpThroughput" oid=".DLIpThroughput" access="rw" datatype="unsignedInt"/>
+		    </entity>
+		    <entity name="ManagementServer" oid=".ManagementServer" access="r" min-occurs="1" max-occurs="1">
+				<field name="URL" oid=".URL" access="rw" datatype="string"/>
+				<field name="Username" oid=".Username" access="rw" datatype="string"/>
+				<field name="Password" oid=".Password" access="rw" datatype="string"/>
+				<field name="PeriodicInformEnable" oid=".PeriodicInformEnable" access="rw" datatype="boolean"/>
+				<field name="PeriodicInformInterval" oid=".PeriodicInformInterval" access="rw" datatype="unsignedInt" dataunit="sec"/>
+				<field name="PeriodicInformTime" oid=".PeriodicInformTime" access="rw" datatype="dateTime"/>
+				<field name="ParameterKey" oid=".ParameterKey" access="rw" datatype="string"/>
+				<field name="ConnectionRequestURL" oid=".ConnectionRequestURL" access="rw" datatype="string"/>
+				<field name="ConnectionRequestUserName" oid=".ConnectionRequestUserName" access="rw" datatype="string"/>
+				<field name="ConnectionRequestPassword" oid=".ConnectionRequestPassword" access="rw" datatype="string"/>
+		    </entity>
+		</entity>
+    </entities>
+</configuration-structure>
